@@ -14,7 +14,8 @@
 ActiveRecord::Schema.define(:version => 20130323143149) do
 
   create_table "photos", :force => true do |t|
-    t.text     "file"
+    t.text     "image1"
+    t.text     "image2"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
