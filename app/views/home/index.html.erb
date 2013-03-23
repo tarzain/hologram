@@ -18,8 +18,8 @@
       <p class="fps"></p>
     </div>
     <div id="overlay">
-      <%= base64_image @photo.image1 %>
-      <%= base64_image @photo.image2 %>
+      <%= base64_image @photo.image1, "overlay" %>
+      <%= base64_image @photo.image2, "overlay" %>
     </div>
     <script src="js/THREEx.KeyboardState.js"></script>
     <script src="js/three.min.js"></script>
