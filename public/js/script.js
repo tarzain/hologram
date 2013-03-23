@@ -90,30 +90,7 @@ function init() {
 	keyboard = new THREEx.KeyboardState();
 
 	//init webcam texture
-	video = document.createElement('video');
-	video.width = vidWidth;
-	video.height = vidHeight;
-	video.autoplay = true;
-	video.loop = true;
-
-	//make it cross browser
-	//window.URL = window.URL || window.webkitURL;
-	//navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-	//get webcam
-	/*navigator.getUserMedia({
-		video: true
-	}, function(stream) {
-		//on webcam enabled
-		video.src = window.URL.createObjectURL(stream);
-		prompt.style.display = 'none';
-		title.style.display = 'inline';
-		container.style.display = 'inline';
-		gui.domElement.style.display = 'inline';
-	}, function(error) {
-		prompt.innerHTML = 'Unable to capture WebCam. Please reload the page.';
-	});
-	*/
-	video.src = getParameterByName("img1");
+	video = $('image1');
 	videoTexture = new THREE.Texture(video);
 
 	world3D = new THREE.Object3D();
@@ -218,9 +195,14 @@ function getZDepths() {
 
 	//draw webcam video pixels to canvas for pixel analysis
 	//double up on last pixel get because there is one more vert than pixels
-	ctx.drawImage(video, 0, 0, canvasWidth + 1, canvasHeight + 1);
+	ctx.drawImage(image1, 0, 0, canvasWidth + 1, canvasHeight + 1);
+	secondCanvas = document.createElement('canvas');
+	document.body.appendChild(secondCanvas);
+	secondCanvas.style.position = 'absolute';
+	secondCanvas.style.display = 'none';
+	ctx2 = secondCanvas.getContext('2d');
 	//pixels = ctx.getImageData(0, 0, canvasWidth + 1, canvasHeight + 1).data;
-	$(document).keydown(function(event) {
+	/*$(document).keydown(function(event) {
 	  if (event.which == 71) {
 	    pixelsLast=pixels;
 		interval = 0;
@@ -237,24 +219,10 @@ function getZDepths() {
 	   else if(event.which == 87){
 	   	video.readyState = !video.HAVE_ENOUGH_DATA;
 	   }
-	});
-	if((interval<=params.intervalDuration)){
-		pixels = ctx.getImageData(0, 0, canvasWidth + 1, canvasHeight + 1).data;
-		pixelsLast=pixels;
-		//interval = 0;
-		last = true;
-		interval++;
-	}
-	else if(!captured){
-		//pixels = ctx.getImageData(0, 0, canvasWidth + 1, canvasHeight + 1).data;
-	}
-	else{
-		//pixels = 
-		interval++;
-		//console.log(interval);
-		//console.log(params.intervalDuration);
-	}
-
+	});*/
+	//ctx.drawImage(image1,0,0); // Or at whatever offset you like
+	pixels = ctx.getImageData(0, 0, canvasWidth + 1, canvasHeight + 1).data;
+	pixelsLast=ctx2.getImageData(0,0, canvasWidth+1, canvasHeight+1).data;
 	for (var i = 0; i < canvasWidth + 1; i++) {
 		for (var j = 0; j < canvasHeight + 1; j++) {
 			var color = new THREE.Color(getColor(i, j));
