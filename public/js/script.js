@@ -90,10 +90,10 @@ function init() {
 	keyboard = new THREEx.KeyboardState();
 
 	//init webcam texture
-	video = $('image1');
+	video = $('#image1');
 	videoTexture = new THREE.Texture(video);
 
-	video2 = $('image2');
+	video2 = $('#image2');
 	videoTexture2 = new THREE.Texture(video2);
 
 	world3D = new THREE.Object3D();
