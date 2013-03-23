@@ -93,6 +93,9 @@ function init() {
 	video = $('image1');
 	videoTexture = new THREE.Texture(video);
 
+	video2 = $('image2');
+	videoTexture2 = new THREE.Texture(video2);
+
 	world3D = new THREE.Object3D();
 	scene.add(world3D);
 
@@ -136,10 +139,6 @@ function init() {
 	renderer.sortObjects = false;
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	container.appendChild(renderer.domElement);
-
-	// add Stats
-	stats = new Stats();
-	document.querySelector('.fps').appendChild(stats.domElement);
 
 	//init vidCanvas - used to analyze the video pixels
 	vidCanvas = document.createElement('canvas');
@@ -194,12 +193,13 @@ function getZDepths() {
 
 	//draw webcam video pixels to canvas for pixel analysis
 	//double up on last pixel get because there is one more vert than pixels
-	ctx.drawImage(image1, 0, 0, canvasWidth + 1, canvasHeight + 1);
+	ctx.drawImage(video, 0, 0, canvasWidth + 1, canvasHeight + 1);
 	secondCanvas = document.createElement('canvas');
 	document.body.appendChild(secondCanvas);
 	secondCanvas.style.position = 'absolute';
 	secondCanvas.style.display = 'none';
 	ctx2 = secondCanvas.getContext('2d');
+	ctx2.drawImage(video2, 0, 0, canvasWidth + 1, canvasHeight + 1);
 	//pixels = ctx.getImageData(0, 0, canvasWidth + 1, canvasHeight + 1).data;
 	/*$(document).keydown(function(event) {
 	  if (event.which == 71) {
