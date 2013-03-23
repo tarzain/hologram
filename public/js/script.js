@@ -153,7 +153,6 @@ function init() {
 	window.addEventListener('resize', onResize, false);
 	document.addEventListener('mousewheel', onWheel, false);
 	container.addEventListener('click', hideInfo, false);
-	document.querySelector('.closeBtn').addEventListener('click', hideInfo, false);
 	title.addEventListener('click', showInfo, false);
 
 	//handle WebGL context lost
